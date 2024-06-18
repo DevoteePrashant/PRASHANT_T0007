@@ -1,3 +1,46 @@
 p{
     color: red;
 }
+.css{
+    color: #20cd14;
+}
+#css{
+    color: #14b4cd;
+}
+[title~="css"]{
+    color: #3d0545;
+}
+[title*="te"]{
+    color: #98b905;
+}
+
+
+a:visited{
+    color: #27ce8b;
+}
+a:active{
+    color: #c60606;
+}
+a:hover{
+    color: #510ab5;
+}
+a:link{
+    color: #756c20;
+}
+
+.paragraph::first-letter{
+    color: red;
+    font-size: 49px;
+}
+.paragraph::first-line{
+    color: rgb(55, 0, 255);
+}
+
+.paragraph::after{
+content: url(https://picsum.photos/id/1/20/40);
+}
+
+::marker{
+    color: #48ba0a;
+    
+}
