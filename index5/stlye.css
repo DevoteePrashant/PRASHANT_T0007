@@ -1,0 +1,27 @@
+.text-center{
+  text-align: center;
+}
+
+.bg{
+  background-color: aliceblue;
+  color: rgb(34, 121, 143);
+  background-image: url(https://picsum.photos/id/1/200/300);
+  background-repeat: no-repeat ;
+  background-position: 50% 50%;
+  background-size: 220px  200px ;
+  border: 2px solid black;
+  background-attachment:fixed ;
+}
+
+.bg4{
+  background:  linear-gradient( to bottom right, red , blue ,yellow );
+}
+.bg5{
+  background: radial-gradient(  red 12% , blue 43% ,yellow 50% );
+}
+.bg6{
+  background: repeating-radial-gradient(  red 12% , blue 43% ,yellow 50% );
+}
+.bg7{
+  background:  conic-gradient(  red 90deg, blue 130deg ,yellow  160deg);
+}
