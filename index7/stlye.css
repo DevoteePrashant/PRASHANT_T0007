@@ -1,0 +1,81 @@
+.text-center{
+  text-align: center;
+}
+
+
+.animationq{
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition: width 2s;
+  transition-delay: 1s;
+  transition-timing-function: linear;
+}
+
+.animationq:hover{
+  width: 300px;
+}
+.animation2{
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition-delay: 1s;
+  transition-timing-function: linear;
+}
+
+.animation2:hover{
+ transform: rotate(60deg);
+  width: 300px;
+}
+.animation3{
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition-delay: 1s;
+  transition-timing-function: linear;
+}
+
+.animation3:hover{
+  transform: scale(0.7);
+  width: 300px;
+}
+.animation4{
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition-delay: 1s;
+  transition-timing-function: linear;
+}
+
+.animation4:hover{
+transform: translate(423px ,434px);
+  width: 300px;
+}
+.animation5{
+  width: 100px;
+  height: 100px;
+  background: red;
+  transition-delay: 1s;
+  transition-timing-function: linear;
+}
+
+.animation5:hover{
+transform: skew(123deg ,54deg);
+  width: 300px;
+}
+
+.anime{
+  animation-name:anime ;
+ width: 121px;
+ height: 231px;
+ background-color: blue; 
+ animation-duration: 3s ;
+ animation-delay:1s ;
+ animation-timing-function: ease-in-out ;
+}
+
+@keyframes anime {
+  from{background-color: blue; }
+  to{background-color: rgb(255, 0, 242); }
+  
+}
