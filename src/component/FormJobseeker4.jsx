@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import Dheader3 from "./Dheader3";
 
 function FormJobseeker4() {
+  const [languages, setLanguages] = useState(["English", "Spanish"])
+  const [newLanguage, setNewLanguage] = useState("")
+  const [isLanguagesDropdownOpen, setIsLanguagesDropdownOpen] = useState(false)
   const [skills, setSkills] = useState([
     "Adobe Photoshop",
     "Adobe Illustrator",
@@ -16,7 +19,7 @@ function FormJobseeker4() {
   ]);
   const [newSkill, setNewSkill] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const languagesDropdownRef = useRef(null)
   const dropdownRef = useRef(null);
 
   // Common skills for the dropdown
@@ -37,6 +40,23 @@ function FormJobseeker4() {
     "Marketing",
     "Content Writing",
   ];
+  const languageOptions = [
+    "English",
+    "Spanish",
+    "French",
+    "German",
+    "Chinese",
+    "Japanese",
+    "Russian",
+    "Arabic",
+    "Portuguese",
+    "Hindi",
+    "Italian",
+    "Korean",
+    "Dutch",
+    "Swedish",
+    "Turkish"
+  ]
 
   // Filter options based on input
   const filteredOptions = skillOptions.filter(
@@ -45,6 +65,33 @@ function FormJobseeker4() {
       skill.toLowerCase().includes(newSkill.toLowerCase())
   );
 
+   // Filter language options based on input
+   const filteredLanguageOptions = languageOptions.filter(
+    language =>
+      !languages.includes(language) &&
+      language.toLowerCase().includes(newLanguage.toLowerCase())
+  )
+
+  const handleAddLanguage = e => {
+    if (e.key === "Enter" && newLanguage.trim()) {
+      if (!languages.includes(newLanguage.trim())) {
+        setLanguages([...languages, newLanguage.trim()])
+      }
+      setNewLanguage("")
+      e.preventDefault()
+    }
+  }
+  const handleSelectLanguage = language => {
+    if (!languages.includes(language)) {
+      setLanguages([...languages, language])
+    }
+    setNewLanguage("")
+    setIsLanguagesDropdownOpen(false)
+  }
+
+  const handleRemoveLanguage = indexToRemove => {
+    setLanguages(languages.filter((_, index) => index !== indexToRemove))
+  }
   const handleAddSkill = (e) => {
     if (e.key === "Enter" && newSkill.trim()) {
       if (!skills.includes(newSkill.trim())) {
@@ -70,6 +117,7 @@ function FormJobseeker4() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Skills submitted:", skills);
+    console.log("Languages submitted:", languages)
     // Handle form submission logic here
   };
 
@@ -78,6 +126,12 @@ function FormJobseeker4() {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
+      }
+      if (
+        languagesDropdownRef.current &&
+        !languagesDropdownRef.current.contains(event.target)
+      ) {
+        setIsLanguagesDropdownOpen(false)
       }
     }
 
@@ -223,7 +277,81 @@ function FormJobseeker4() {
                       </div>
                     ))}
                   </div>
+
+ <h3 className="text-lg font-semibold mb-2 text-left mt-6">
+                  Languages
+                </h3>
+                <div
+                  className="relative mb-4 md:mb-6"
+                  ref={languagesDropdownRef}
+                >
+                  <input
+                    type="text"
+                    value={newLanguage}
+                    onChange={e => setNewLanguage(e.target.value)}
+                    onKeyDown={handleAddLanguage}
+                    onFocus={() => setIsLanguagesDropdownOpen(true)}
+                    placeholder="Add languages you speak"
+                    className="w-full border-b border-gray-300 pb-2 pr-8 focus:border-purple-500 focus:outline-none text-sm md:text-base"
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setIsLanguagesDropdownOpen(!isLanguagesDropdownOpen)
+                    }
+                    className="absolute right-2 bottom-3 h-4 w-4 text-gray-500"
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </button>
+
+                  {/* Languages Dropdown Menu */}
+                  {isLanguagesDropdownOpen && (
+                    <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
+                      {filteredLanguageOptions.length > 0 ? (
+                        filteredLanguageOptions.map((language, index) => (
+                          <div
+                            key={index}
+                            className="px-4 py-2 hover:bg-purple-50 cursor-pointer flex items-center justify-between text-sm"
+                            onClick={() => handleSelectLanguage(language)}
+                          >
+                            <span>{language}</span>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="px-4 py-2 text-gray-500 text-sm">
+                          {newLanguage
+                            ? "No matching languages found"
+                            : "Type to search or select a language"}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
+
+                {/* Languages Tags */}
+                <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
+                  {languages.map((language, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-1 md:gap-2 bg-purple-100 text-black px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-semibold"
+                    >
+                      <span>{language}</span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveLanguage(index)}
+                        className="hover:bg-blue-200 rounded-full p-0.5"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+
+
+                </div>
+
+
 
                 {/* Save & Next Button */}
 
